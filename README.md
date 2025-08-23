@@ -60,9 +60,9 @@ _✨ 维维豆奶欢乐开怀 😋 ✨_
 
 </details>
 <details>
-<summary>conda</summary>
+<summary>uv</summary>
 
-    conda install nonebot-plugin-weiweibot
+    uv add nonebot-plugin-weiweibot
 
 </details>
 
@@ -81,6 +81,7 @@ _✨ 维维豆奶欢乐开怀 😋 ✨_
 |     COMMAND_START      |  否  |      ["/"]      |          决定命令开头           |
 |      COMMAND_SEP       |  否  |      ["."]      |         决定命令分割符          |
 |       GPG_EMAIL        |  是  | xxx@example.com |       决定 bot 使用的密钥       |
+|   PLUG_LISTEN_GROUPS   |  是  | [114514, 1919810] |      决定插件响应群组         |
 | ALGOLIA_APPLICATION_ID |  是  |     114514      | 请先将 nin 的图片库上传 algolia |
 |    ALGOLIA_API_KEY     |  是  |     114514      | 请先将 nin 的图片库上传 algolia |
 
@@ -102,5 +103,7 @@ _✨ 维维豆奶欢乐开怀 😋 ✨_
 <p> 🥹 目前仅 /vv 和 /al 指令支持 gpg, clip 正在绝赞施工中 </p>
 
 <p> ⚠️ 目前部分指令未进行全面的测试 </p>
+
+<p> 😘本项目使用了 nonebot_plugin_localstore 进行会话存储, 存储位置等请参照该插件文档 </p>
 
 🥰 nin 可以在本仓库的 assets 里下载样例图片

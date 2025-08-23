@@ -53,7 +53,9 @@ def simple_search(
             if not keyword:
                 return None
             results: List[str] = [
-                img for key in keyword.split() for img in imglist if key.lower() in img
+                img
+                for img in imglist
+                if all(key.lower() in img.lower() for key in keyword.split())
             ]
             match mode:
                 case search_mode.SINGLE:

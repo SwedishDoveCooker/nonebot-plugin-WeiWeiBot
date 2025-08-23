@@ -89,7 +89,7 @@ def index(dir: Path) -> List[str]:
 
 
 def filter_zh_en(s: str) -> str:
-    return "".join(re.findall(r"[\u4e00-\u9fa5a-zA-Z\s]+", s))
+    return " ".join(re.findall(r"[\u4e00-\u9fa5a-zA-Z\s]+", s))
 
 
 # print(index(Path(__file__).parent))

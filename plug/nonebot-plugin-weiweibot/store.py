@@ -1,8 +1,8 @@
 from nonebot import require
 from typing import Optional
-import nonebot_plugin_localstore as store
 
 require("nonebot_plugin_localstore")
+import nonebot_plugin_localstore as store  # noqa: E402
 
 
 def read(filename) -> Optional[str]:

@@ -20,7 +20,7 @@ from nonebot.adapters.onebot.v11 import (
 from nonebot.log import default_format
 from nonebot.params import CommandArg
 from nonebot.plugin import PluginMetadata
-from nonebot.rule import is_type
+from nonebot.rule import is_type, Rule
 
 from .config import config
 from .search import agent, search_mode
@@ -69,10 +69,15 @@ headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 1145141919810",
 }
 
+
+def plug_rule_group(event: GroupMessageEvent) -> bool:
+    return str(event.group_id) in config.plug_listen_groups
+
+
 helper = on_command(
     "help",
     block=True,
-    rule=is_type(PrivateMessageEvent, GroupMessageEvent),
+    rule=is_type(GroupMessageEvent) & Rule(plug_rule_group),
 )
 
 
@@ -114,7 +119,7 @@ async def handle_message_helper(event: Event) -> None:
 al = on_command(
     "al",
     block=True,
-    rule=is_type(PrivateMessageEvent, GroupMessageEvent),
+    rule=is_type(GroupMessageEvent) & Rule(plug_rule_group),
 )
 
 
@@ -176,7 +181,7 @@ async def handle_message_al(event: Event, args: Annotated[Message, CommandArg()]
 deta = on_command(
     "deta",
     block=True,
-    rule=is_type(PrivateMessageEvent, GroupMessageEvent),
+    rule=is_type(GroupMessageEvent) & Rule(plug_rule_group),
 )
 
 
@@ -199,7 +204,7 @@ async def handle_message_deta():
 cl = on_command(
     "cl",
     block=True,
-    rule=is_type(PrivateMessageEvent, GroupMessageEvent),
+    rule=is_type(GroupMessageEvent) & Rule(plug_rule_group),
 )
 
 
@@ -211,7 +216,7 @@ async def handle_message_cl():
 vv = on_command(
     "vv",
     block=True,
-    rule=is_type(PrivateMessageEvent, GroupMessageEvent),
+    rule=is_type(GroupMessageEvent) & Rule(plug_rule_group),
 )
 
 
@@ -226,7 +231,7 @@ async def handle_message_vv(event: Event, args: Annotated[Message, CommandArg()]
         result: Optional[str] = agent(
             mode=search_mode.SINGLE,
             imglist=imglist,
-            keyword=filter_zh_en(keyword.lower()),
+            keyword=filter_zh_en(keyword.lower()).strip(),
         )
         if result:
             logger.info(f"/vv: query: {keyword}, result: {result}")
@@ -247,7 +252,7 @@ r = on_command(
     "r",
     aliases={"rand"},
     block=True,
-    rule=is_type(PrivateMessageEvent, GroupMessageEvent),
+    rule=is_type(GroupMessageEvent) & Rule(plug_rule_group),
 )
 
 
@@ -269,7 +274,7 @@ acc = on_command(
     "acc",
     aliases={"d"},
     block=True,
-    rule=is_type(PrivateMessageEvent, GroupMessageEvent),
+    rule=is_type(GroupMessageEvent) & Rule(plug_rule_group),
 )
 
 
@@ -334,7 +339,7 @@ gpgload = on_command(
     "gpg",
     aliases={"gnupg"},
     block=True,
-    rule=is_type(PrivateMessageEvent, GroupMessageEvent),
+    rule=is_type(GroupMessageEvent) & Rule(plug_rule_group),
 )
 
 
@@ -362,7 +367,7 @@ async def _(event: Event, args: Annotated[Message, CommandArg()]):
 uploader = on_command(
     "upload",
     aliases={"上传"},
-    rule=is_type(PrivateMessageEvent, GroupMessageEvent),
+    rule=is_type(GroupMessageEvent) & Rule(plug_rule_group),
     block=True,
 )
 

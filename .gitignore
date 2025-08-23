@@ -170,3 +170,8 @@ cython_debug/
 
 # ruff
 .ruff_cache/
+
+plug/*
+!/plug/nonebot-plugin-weiweibot
+
+save/
